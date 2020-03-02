@@ -63,38 +63,6 @@ body {
   
   
   /* Navbar styling */
-  /* .page-header {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    height: 46px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 100;
-  }
-  .header-content-wrapper {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0px 120px;
-  }
-  .navbar {
-    flex: 1;
-    display: flex;
-    justify-content: flex-start;
-    width: 33%;
-  }
-  .navbar-link {
-    list-style-type: none;
-    font-size: 14px;
-    padding: 0px 15px;
-    color: var(--font-gray-clr);
-    font-weight: bold;
-  } */
   .navbar-link:hover {
     color: var(--twitter-blue-clr);
     text-decoration: underline;
