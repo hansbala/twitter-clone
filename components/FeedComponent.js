@@ -5,7 +5,7 @@ export default {
         return {
             // Linked as if in index.html
             penguinProfilePhotoLink: './assets/img/penguin.png',
-            fetch_url: 'http://ec2-54-172-96-100.compute-1.amazonaws.com/feed/random?q=noodle&size=100',
+            fetch_url: 'http://ec2-54-172-96-100.compute-1.amazonaws.com/feed/random?q=noodle&size=10',
             masterIDs: null,
             displayedIDs: null,
             masterTweets: [],
@@ -20,6 +20,7 @@ export default {
         this.masterIDs = new Set();
         this.displayedIDs = new Set();
         this.fetchTweets();
+        window.addEventListener('scroll', this.feedScrolled);
     },
     methods: {
         // Fetches new tweets and updates masterIDs, and masterTweets,
@@ -34,9 +35,6 @@ export default {
                     this.updateMasterTweetList(data.statuses);
                     // Sort by timestamp
                     this.masterTweets = this.sortTweetList(this.masterTweets);
-                    for (let i = 0; i < this.masterTweets.length; i++) {
-                        console.log(this.masterTweets[i].timeStamp);
-                    }
                 })
                 .catch(err => {
                     // Encountered an error in fetching the tweets
@@ -45,11 +43,8 @@ export default {
         },
         // Sort the tweet list by timestamp
         sortTweetList(tweetList) {
-            console.log("in tweet list...");
             tweetList.sort((tweet1, tweet2) =>
-                moment(tweet2.timeStamp.toString()).format('YYYYMMDD') -
-                moment(tweet1.timeStamp.toString()).format('YYYYMMDD'));
-            console.log(tweetList);
+                new Date(tweet2.timeStamp) - new Date(tweet1.timeStamp));
             return tweetList;
         },
         updateDisplayTweets(tweetList) {
@@ -75,6 +70,11 @@ export default {
             http.send();
             // Return if the image exists on the server
             return http.status != 404;
+        },
+        feedScrolled() {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                this.fetchTweets();
+            }
         },
         updateMasterTweetList(tweetList) {
             for (let idx = 0; idx < tweetList.length; idx++) {
@@ -106,8 +106,11 @@ export default {
 
     },
     template: `
-    <div class="content-wrapper">
-        <div class="content-center" id="mainLink" role="main">
+    <section class="content-wrapper" @scroll="feedScrolled">
+        <div
+            class="content-center" 
+            id="mainLink" 
+            role="main">
             <tweet-component
                 v-for="tweet in masterTweets"
                 :key=tweet.tweet_id
@@ -120,6 +123,6 @@ export default {
                 :fetchedTweet=tweet.fetched
             />
         </div>
-    </div>
+    </section>
     `
 }

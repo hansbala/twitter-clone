@@ -7,10 +7,10 @@ const app = new Vue({
         'header-component': HeaderComponent,
         'feed-component': FeedComponent,
     },
-    template: `
-    <div class="test">
-        <header-component />
-        <feed-component />
-    </div>
-    `
+    // template: `
+    // <div class="test">
+    //     <header-component />
+    //     <feed-component />
+    // </div>
+    // `
 });
