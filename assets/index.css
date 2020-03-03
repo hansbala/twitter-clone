@@ -129,6 +129,40 @@ a#skip-main:focus {
   color: white;
 }
 
+/* New tweet styling */
+.new-tweet-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  width: 100%;
+  max-width: 1190px;
+}
+.submit-btn-area {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  max-width: 1190px;
+}
+#submit-btn {
+  border-radius: 25px;
+  border: 1px solid var(--twitter-blue-clr);
+  font-size: 16px;
+  padding: 7px 25px;
+  background-color: var(--twitter-blue-clr);
+  color: white;
+  font-weight: bold;
+}
+textarea {
+  border: none;
+  width: 100%;
+  resize: none;
+}
+
 /* Body styling */
 .content-wrapper {
   display: flex;

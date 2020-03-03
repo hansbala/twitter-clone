@@ -5,7 +5,8 @@ export default {
         return {
             // Linked as if in index.html
             penguinProfilePhotoLink: './assets/img/penguin.png',
-            fetch_url: 'http://ec2-54-172-96-100.compute-1.amazonaws.com/feed/random?q=noodle&size=10',
+            // Get >= 25 tweets to implement lazy loading
+            fetch_url: 'http://ec2-54-172-96-100.compute-1.amazonaws.com/feed/random?q=noodle&size=30',
             masterIDs: null,
             displayedIDs: null,
             masterTweets: [],

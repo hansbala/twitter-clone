@@ -10,8 +10,13 @@ export default {
         // Stores whether the tweet has been fetched from the API or not
         'fetchedTweet': Boolean,  
     },
+    data() {
+        return {
+            localTimeStamp: null,
+        }
+    },
     created() {
-        
+        this.localTimeStamp = moment(this.timeStamp).format('MMM Do, YYYY hh:mm A');
     },
     template: `
     <div class="tweet">
@@ -19,7 +24,7 @@ export default {
         <div class="tweet-info">
             <p class="tweet-header">
                 <span class="user-info">{{realLifeName}} @{{userHandle}}</span> 
-                <span class="time-stamp">{{timeStamp}}</span>
+                <span class="time-stamp">{{localTimeStamp}}</span>
             </p>
             <p class="tweet-content">{{tweetContent}}</p>
         </div>
