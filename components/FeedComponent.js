@@ -7,9 +7,8 @@ export default {
             // Linked as if in index.html
             penguinProfilePhotoLink: './assets/img/penguin.png',
             // Get >= 25 tweets to implement lazy loading
-            fetch_url: 'http://ec2-54-172-96-100.compute-1.amazonaws.com/feed/random?q=noodle&size=30',
+            fetch_url: 'http://ec2-54-172-96-100.compute-1.amazonaws.com/feed/random?q=noodle&size=5',
             masterIDs: null,
-            displayedIDs: null,
             masterTweets: [],
             searchOn: false,
         }
@@ -17,22 +16,27 @@ export default {
     components: {
         'tweet-component': TweetComponent,
     },
-    mounted() {
+    mounted: function() {
         EventBus.$on('create-tweet', function(tweetContent, timeStamp) {
             // New user tweet creation
+            let unique_id = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+            console.log(unique_id);
+            this.addTweet(unique_id, 'Penguin', 'giant_penguin', 
+                './assets/img/penguin.png', timeStamp, tweetContent, false);
         });
     },
     created() {
         // Initialize masterIDs and displayed IDs as new sets
         this.masterIDs = new Set();
-        this.displayedIDs = new Set();
         this.fetchTweets();
         window.addEventListener('scroll', this.feedScrolled);
     },
     methods: {
         // Fetches new tweets and updates masterIDs, and masterTweets,
-        // and also adds the tweets to the DOM and appropriately updates
-        // displayedIDs with the IDs of all the tweets
+        // and also adds the tweets to the DOM
         fetchTweets() {
             fetch(this.fetch_url)
                 .then(res => res.json())
@@ -79,7 +83,8 @@ export default {
             return http.status != 404;
         },
         feedScrolled() {
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            // Refresh the feed lazily once we scroll to bottom but make sure search filtering is off
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !this.searchOn) {
                 this.fetchTweets();
             }
         },
@@ -111,7 +116,14 @@ export default {
                 }
             }
         },
-
+        // Generates random uuids when called
+        // Reference: https://stackoverflow.com/a/2117523
+        uuidv4() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+              var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+              return v.toString(16);
+            });
+        },
     },
     template: `
     <section class="content-wrapper" @scroll="feedScrolled">
