@@ -18,7 +18,7 @@ export default {
                 <img :src="twitterLogoLink" alt="Twitter Logo" class="twitter-logo" />
             </div>
             <div class="tweet-icon">
-                <button class="tweet-btn"><b>Twitter</b></button>
+                <button class="tweet-btn"><b>Logged in as Penguin</b></button>
             </div>
         </div>
     </header>

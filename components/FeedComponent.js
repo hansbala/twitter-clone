@@ -5,7 +5,7 @@ export default {
     data() {
         return {
             // Get >= 25 tweets to implement lazy loading
-            fetch_url: 'http://ec2-54-172-96-100.compute-1.amazonaws.com/feed/random?q=noodle&size=5',
+            fetch_url: 'http://ec2-54-172-96-100.compute-1.amazonaws.com/feed/random?q=noodle&size=15',
             masterIDs: null,
             masterTweets: [],
             displayTweets: [],
@@ -29,6 +29,7 @@ export default {
         // Fetches new tweets and updates masterIDs, and masterTweets,
         // and also adds the tweets to the DOM
         fetchTweets() {
+            console.log("fetching tweets");
             fetch(this.fetch_url)
                 .then(res => res.json())
                 .then(data => {
@@ -113,6 +114,10 @@ export default {
         },
         // Wrapper funcvtion called by the event bus to add a user tweet to the master list
         addUserTweet(tweetContent, timeStamp) {
+            if (tweetContent.trim() == '') {
+                // Do not allow adding empty tweets
+                return;
+            }
             // Add the tweet to the master list
             let uid = this.uuidv4();
             this.addTweet(uid, 'Penguin', 'giant_penguin', 

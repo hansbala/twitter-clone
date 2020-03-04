@@ -19,7 +19,9 @@ export default {
         this.localTimeStamp = moment(this.timeStamp).format('MMM Do, YYYY hh:mm A');
     },
     template: `
-    <div class="tweet">
+    <div 
+        class="tweet"
+        :class="{ tweetUserEntered: !fetchedTweet }">
         <img :src="profilePhotoLink" alt="profileImageAltText" class="person-avatar">
         <div class="tweet-info">
             <p class="tweet-header">

@@ -129,7 +129,7 @@ a#skip-main:focus {
   color: white;
 }
 
-/* New tweet styling */
+/* Create tweet styling */
 .new-tweet-area {
   display: flex;
   flex-direction: column;
@@ -150,6 +150,9 @@ a#skip-main:focus {
   font-size: 16px;
   max-width: 1190px;
   margin: 0px 20px;
+  border-radius: 25px;
+  border: 2px solid var(--twitter-blue-clr);
+  padding: 10px;
 }
 .submit-btn-area {
   width: 100%;
@@ -201,89 +204,6 @@ a#skip-main:focus {
   margin: 56px auto;
 }
 
-/* Content Left */
-.content-left {
-  width: 290px;
-  background-color: white;
-  margin-right: 10px;
-  margin-left: 10px;
-}
-.cover-image {
-  width: 290px;
-  z-index: -10;
-  background-color: black;
-}
-.profile-image-wrapper {
-  display: flex;
-  justify-content: flex-start;
-  height: 50px;
-}
-.profile-image {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  display: inline;
-  z-index: 30;
-  background-color: white;
-  position: relative;
-  top: -30px;
-  margin-left: 10px;
-}
-.profile-name-wrapper {
-  margin-left: 15px;
-  margin-top: 10px;
-}
-.profile-name-wrapper > p {
-  margin: 0px;
-}
-.profile-stats {
-  display: flex;
-  justify-content: space-between;
-  margin: 0px 20px;
-}
-.gray-font-pr {
-  color: var(--font-gray-clr);
-  font-weight: bold;
-  font-size: 14px;
-  margin-bottom: 0px;
-  padding-bottom: 0px;
-}
-.blue-font-pr {
-  color: var(--twitter-blue-clr);
-  font-weight: bold;
-  font-size: 20px;
-  margin-top: 5px;
-}
-.feed-pause-btn {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 20px;
-}
-#search-input-wrapper {
-  display: flex;
-  justify-content: center;
-}
-#search-bar {
-  width: 90%;
-  padding: 10px;
-  border: none;
-  background-color: #e6ecf0;
-  margin: 15px 0px;
-  border-radius: 25px;
-  font-size: 15px;
-}
-#pause-btn {
-  font-weight: bold;
-  border-radius: 25px;
-  font-size: 16px;
-  padding: 7px 25px;
-  background-color: var(--twitter-blue-clr);
-  color: white;
-}
-#pause-btn:focus {
-  border: none;
-}
-
 /* Content center */
 .content-center {
   flex: 1;
@@ -296,6 +216,10 @@ a#skip-main:focus {
   margin: 0px;
   padding: 0px;
   border-bottom: 1px solid #e6ecf0;
+}
+.tweetUserEntered {
+  background-color: #dddeeb;
+  border-radius: 20px;
 }
 .person-avatar {
   border-radius: 50%;
