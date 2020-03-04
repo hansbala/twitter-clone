@@ -8,6 +8,7 @@ export default {
             fetch_url: 'http://ec2-54-172-96-100.compute-1.amazonaws.com/feed/random?q=noodle&size=5',
             masterIDs: null,
             masterTweets: [],
+            displayTweets: [],
             searchOn: false,
         }
     },
@@ -16,6 +17,7 @@ export default {
     },
     mounted: function() {
         EventBus.$on('create-tweet', this.addUserTweet);
+        EventBus.$on('search-query', this.handleSearch);
     },
     created: function() {
         // Initialize masterIDs and displayed IDs as new sets
@@ -35,6 +37,7 @@ export default {
                     this.updateMasterTweetList(data.statuses);
                     // Sort by timestamp
                     this.masterTweets = this.sortTweetList(this.masterTweets);
+                    this.displayTweets = this.masterTweets.slice(0);
                 })
                 .catch(err => {
                     // Encountered an error in fetching the tweets
@@ -118,6 +121,8 @@ export default {
             this.masterIDs.add(uid);
             // Sort the masterTweet list
             this.masterTweets = this.sortTweetList(this.masterTweets);
+            // Port over the masterTweets to the displayTweets
+            this.displayTweets = this.masterTweets.slice(0);
         },
         // Generates random uuids when called
         // Reference: https://stackoverflow.com/a/2117523
@@ -127,6 +132,42 @@ export default {
               return v.toString(16);
             });
         },
+        handleSearch(searchQuery) {
+            // Set the search on value appropriately
+            this.searchOn = searchQuery == '' ? false : true;
+            if (!this.searchOn) {
+                // If search entry is null, then clone the masterTweets
+                this.displayTweets = this.masterTweets.slice(0);
+            } else {
+                // Filter the tweets by the searchQuery provided
+                this.displayTweets = this.searchTweets(this.masterTweets, searchQuery);
+            }
+        },
+        searchTweets(tweetList, searchQuery) {
+            // Create a new array of all matching tweets
+            let filteredTweets = [];
+            // Split the search query into words by splitting with ' ' (space)
+            searchQuery = searchQuery.toLowerCase().split(' ');
+            for (let i = 0; i < tweetList.length; i++) {
+                let tweetText = tweetList[i].tweetContent.toLowerCase().split(' ');
+                let found = true;
+                for (let j = 0; j < searchQuery.length; j++) {
+                    // search reward function (whole word matches)
+                    if (tweetText.filter(keyWord => {
+                        return keyWord === searchQuery[j];
+                    }).length == 0) {
+                        // Could not find that word in the text, so break
+                        found = false;
+                        break;
+                    }
+                }
+                // Check if found is true, if it is append it to the filteredTweets list
+                if (found) {
+                    filteredTweets.push(tweetList[i]);
+                }
+            }
+            return filteredTweets;
+        },
     },
     template: `
     <section class="content-wrapper" @scroll="feedScrolled">
@@ -135,7 +176,7 @@ export default {
             id="mainLink" 
             role="main">
             <tweet-component
-                v-for="tweet in masterTweets"
+                v-for="tweet in displayTweets"
                 :key=tweet.tweetID
                 :profilePhotoLink=tweet.imageLink
                 :profileImageAltText=tweet.realLifeName
