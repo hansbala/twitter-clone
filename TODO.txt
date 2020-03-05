@@ -1,4 +1,0 @@
--> Sort out the layout
--> Include tweet component over twitter feed (with scroll functionality)
--> Include links to madlib game and tic-tac-toe (in header probably)
--> Make tweet button set focus to the write a tweet thing

@@ -10,10 +10,10 @@ export default {
         <div class="header-content-wrapper">
             <nav class="navbar">
                 <li class="navbar-link">
-                    <router-link to="/tic-tac-toe"> TicTacToe </router-link>
+                    <router-link to="/tictactoe"> TicTacToe </router-link>
                 </li>
                 <li class="navbar-link">
-                    <router-link to="/Madlibs"> Madlibs </router-link>
+                    <router-link to="/madlibs"> Madlibs </router-link>
                 </li>
                 <li class="navbar-link"><a href="#"></a>Notifications</li>
                 <li class="navbar-link"><a href="#"></a>Messages</li>

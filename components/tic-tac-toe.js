@@ -84,7 +84,7 @@ Vue.component('game-board', {
         },
 
         playerMove(r,c) {
-            cell_id = ((r - 1) * 3 + c) + "";
+            let cell_id = ((r - 1) * 3 + c) + "";
             if (document.getElementById(cell_id).innerHTML != "") {
                 console.log("This cell is empty");
                 // Do not do anything if the cell is occupied
@@ -144,21 +144,24 @@ Vue.component('game-board', {
 });
 
 export default {
-    data: {
-        message: 'Welcome to the game!',
-        playerNames: [],
-        appClasses: ['w-100', 'h-100', 'p-5', 'd-flex', 'flex-column', 'align-items-center'],
-        playerReady: {}
+    data() {
+        return {
+            message: 'Welcome to the game!',
+            playerNames: [],
+            appClasses: ['w-100', 'h-100', 'p-5', 'd-flex', 'flex-column', 'align-items-center'],
+            playerReady: {}
+        }
     },
     methods: {
         onPlayerReady(playerName, isReady) {
             this.$set(this.playerReady, playerName, isReady);
         }
     },
-    created: function() {
+    created() {
+        const self = this;
         window.setTimeout(() => {
-            app.message = 'Ready to get started?';
-            app.playerNames.push('Alice', 'Bob');
+            self.message = 'Ready to get started?';
+            self.playerNames.push('Alice', 'Bob');
         }, 1000);
     },
     computed: {
@@ -169,19 +172,8 @@ export default {
         }
     },
     template: `
-    <div id="tictactoe" :class="appClasses">
-        <game-title></game-title>
-        <welcome-message :message="message" :player-names="playerNames"></welcome-message>
-        <template v-if="playerNames.length">
-            <ready-checkbox :name="playerNames[0]" @player-ready="onPlayerReady"></ready-checkbox>
-            <ready-checkbox :name="playerNames[1]" @player-ready="onPlayerReady"></ready-checkbox>
-        </template>
-        <div v-else>
-            <div class="spinner-grow text-primary" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <game-board v-if="bothPlayerReady"></game-board>
+    <div style="margin-top: 50px;">
+        <game-board></game-board>
     </div>
     `
 };
