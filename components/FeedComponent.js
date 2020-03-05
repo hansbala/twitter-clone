@@ -158,7 +158,7 @@ export default {
             // Create a new array of all matching tweets
             let filteredTweets = [];
             // Split the search query into words by splitting with ' ' (space)
-            searchQuery = searchQuery.toLowerCase().split(' ');
+            searchQuery = searchQuery.trim().toLowerCase().split(' ');
             for (let i = 0; i < tweetList.length; i++) {
                 let tweetText = tweetList[i].tweetContent.toLowerCase().split(' ');
                 let found = true;
