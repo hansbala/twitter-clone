@@ -19,6 +19,7 @@ export default {
     template: `
     <div class="new-tweet-area">
         <div class="write-area-wrapper">
+            <label for="write-tweet-area" style="display: none;">Write tweet: </label>
             <textarea 
                 id="write-tweet-area" 
                 v-model="newTweetContent"

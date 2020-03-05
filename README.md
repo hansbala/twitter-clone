@@ -55,6 +55,13 @@ We must also mention here that our project directory also includes a `madlibs` f
 ## Known Bugs
 * None :')
 
+## Linting and accessibility checks
+I ran my entire project through `eslint` combined with the `eslint-plugin-vue`. I fixed all errors but disregarded a few of them such as the following:
+* `Vue/moment` is not defined. I disregarded this error because `vue` and `vue-router` were already imported in the `index.html` file and the linter did not know that.
+* I ran my `HTML` page through the `WAVE` accessibility checker. I corrected all of the relevant errors however, I did purposely did not change a few errors that the `Wave` tool said were errors:
+	* Empty Link errors: Currently, I also have my messages and notifications page links which do not point to anything. However, this is not an error as the whole web app is not complete.
+	* Contrast errors: While the accessibility tool displayed that there were 4 low contrast errors, two of them were in the skip links. Of the remainder of the two the contrast was not low so this was disregarded. 
+
 ## References
 In order to implement just a few functions, online resources were consulted. Here are the functions along with their references:
 * `uuidv4()` 
