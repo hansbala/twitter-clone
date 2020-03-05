@@ -28,6 +28,3 @@ export default {
     </header>
     `,
 };
-
-{/* <li class="navbar-link"><a href="#"></a>Home</li>
-<li class="navbar-link"><a href="#"></a>Moments</li> */}
