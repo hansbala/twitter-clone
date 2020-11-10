@@ -1,5 +1,4 @@
-#  Assignment3
-
+#  Twitter Clone
   
 
 ##  Project Description
